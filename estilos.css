@@ -1,0 +1,40 @@
+/* 1. Herencia: esto lo adoptan todos los textos por defecto */
+body {
+    font-family: sans-serif;
+    color: #333333;
+}
+
+/* 2. Aislamiento por zonas (Selectores combinados) */
+header nav ul li a {
+    color: #0055aa;
+}
+
+aside ul li a {
+    color: #009933;
+}
+
+footer ul li a {
+    color: #aa00aa;
+}
+
+/* 3. Conflicto de autoridad (Cascada vs Especificidad) */
+/* 
+   Si dejas esta regla del ID y la de la clase abajo, el ID gana siempre 
+   por tener 100 puntos de especificidad frente a los 10 de la clase.
+   
+#btn-destacado {
+    color: red;
+}
+*/
+
+/* 4. Refactorización (Estandarización) */
+/* Eliminamos el #id de arriba y usamos clases para que no haya problemas */
+
+.btn-comprar {
+    color: blue;
+}
+
+/* Selector con dos clases: 10 pts + 10 pts = 20 pts */
+.btn-comprar.destacado {
+    color: red;
+}
