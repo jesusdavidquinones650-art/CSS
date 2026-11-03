@@ -1,26 +1,17 @@
 # CSS
-# Taller CSS - Jerarquia y Especificidad
 
-Resumen del trabajo realizado para la guia de CSS.
+# Taller CSS - Modelo de Caja
 
-## Calculo de Especificidad
-El navegador le da un peso a cada selector para saber cual aplicar:
-- Etiqueta = 1 punto (ej: body, h1, a)
-- Clase = 10 puntos (ej: .btn-comprar)
-- ID = 100 puntos (ej: #btn-destacado)
+## Hallazgos: El Modelo de Caja
 
-## El conflicto del boton
-En el HTML, el boton de "Mouse" tiene la clase `btn-comprar` y el ID `btn-destacado`.
-Al principio en el CSS puse el ID con color rojo y la clase con color azul.
-El boton se pintó de rojo porque el ID pesa 100 puntos y la clase solo 10, sin importar el orden en que escribí el código (la cascada).
+1. **Margin vs Padding:** El `padding` es el espacio por dentro de la caja (aleja el texto del borde). El `margin` es el espacio por fuera (empuja la caja para alejarla de las demás).
+2. **box-sizing: border-box:** Es obligatorio para que el padding y el borde no agranden la caja hacia afuera. Así el tamaño total se mantiene y no se daña el diseño.
+3. **Margen grande entre hermanos:** Si le pongo un margen grande a un artículo, empuja a los otros artículos, creando un espacio de separación muy grande entre ellos.
 
-## Refactorizacion
-Para arreglar esto y no usar malas prácticas como `!important` o IDs en CSS, refactoricé el código:
-- En el HTML le agregué una segunda clase al enlace: `class="btn-comprar destacado"`.
-- En el CSS borré la regla del `#btn-destacado` y usé `.btn-comprar.destacado` (que vale 20 puntos). Así se mantiene el color rojo de forma limpia.
+## Comandos Git
 
-## Comandos de Git
-Los comandos que usé para subir esto fueron:
+```bash
+git checkout -b feature/modelo-caja
 git add .
-git commit -m "feat(styles): maquetar catalogo semantico y aplicar jerarquia CSS"
-git push origin develop
+git commit -m "feat(ui): implementar modelo de caja y backgrounds"
+git push origin feature/modelo-caja

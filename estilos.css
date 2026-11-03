@@ -1,40 +1,95 @@
-/* 1. Herencia: esto lo adoptan todos los textos por defecto */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: sans-serif;
     color: #333333;
+    margin: 0; 
 }
 
-/* 2. Aislamiento por zonas (Selectores combinados) */
+/* Enlaces por zonas */
 header nav ul li a {
-    color: #0055aa;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 aside ul li a {
     color: #009933;
+    text-decoration: underline;
 }
 
 footer ul li a {
     color: #aa00aa;
+    text-decoration: underline;
 }
 
-/* 3. Conflicto de autoridad (Cascada vs Especificidad) */
-/* 
-   Si dejas esta regla del ID y la de la clase abajo, el ID gana siempre 
-   por tener 100 puntos de especificidad frente a los 10 de la clase.
-   
-#btn-destacado {
-    color: red;
-}
-*/
-
-/* 4. Refactorización (Estandarización) */
-/* Eliminamos el #id de arriba y usamos clases para que no haya problemas */
-
+/* Botones */
 .btn-comprar {
-    color: blue;
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
 }
 
-/* Selector con dos clases: 10 pts + 10 pts = 20 pts */
 .btn-comprar.destacado {
-    color: red;
+    background-color: red;
+    color: yellow;
+}
+
+/* Modelo de Caja y Fondos (Subactividad 2) */
+header {
+    background-color: #222222;
+    /* NUEVA IMAGEN DE FONDO (Tecnología) */
+    background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop'); 
+    background-size: cover;
+    background-position: center;
+    padding: 30px;
+}
+
+main {
+    background-color: #e6f2ff;
+    display: block;
+    padding: 10px;
+}
+
+aside {
+    background-color: #e6ffe6;
+    display: block;
+    padding: 10px;
+}
+
+footer {
+    background-color: #333333;
+    color: white;
+    padding: 10px;
+}
+
+article {
+    background-color: white;
+    border: 1px solid #cccccc;
+    padding: 20px; /* Aire interno */
+    margin: 15px;  /* Fuerza exterior */
+}
+
+.precio {
+    font-weight: bold;
+}
+
+header nav ul, aside ul, footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+footer ul li {
+    display: inline-block;
+    margin-right: 15px;
 }
