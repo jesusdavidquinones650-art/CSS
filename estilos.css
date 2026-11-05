@@ -1,95 +1,140 @@
-* {
+:root {
+    /* COLORES  */
+    --color-principal: #222222;
+    --color-secundario: #e6f2ff;
+    --color-terciario: #e6ffe6;
+    --color-fondo: #333333;
+
+    --color-texto: #333333;
+    --color-texto-inverso: #ffffff;
+    --color-borde: #cccccc;
+    --color-superficie: #ffffff;
+
+    --color-enlace-header: #ffffff;
+    --color-enlace-aside: #009933;
+    --color-enlace-footer: #e0a0e0;
+
+    --color-btn-fondo: #1565c0;
+    --color-btn-texto: #ffffff;
+    --color-btn-destacado-fondo: #c62828;
+    --color-btn-destacado-texto: #ffeb3b;
+
+    /*TIPOGRAFÍA*/
+    --fuente-base: sans-serif;
+    --tamano-base: 16px;
+    --interlineado: 1.5;
+    --peso-fuerte: bold;
+
+    /* ESPACIADO  */
+    --espacio-xs: 5px;
+    --espacio-sm: 10px;
+    --espacio-md: 15px;
+    --espacio-lg: 20px;
+    --espacio-xl: 30px;
+
+    /* BORDES Y RADIOS  */
+    --borde-fino: 1px solid var(--color-borde);
+    --radio-sm: 4px;
+}
+
+*, *::before, *::after {
     box-sizing: border-box;
 }
 
 body {
-    font-family: sans-serif;
-    color: #333333;
-    margin: 0; 
+    font-family: var(--fuente-base);
+    font-size: var(--tamano-base);
+    line-height: var(--interlineado);
+    color: var(--color-texto);
+    margin: 0;
 }
 
-/* Enlaces por zonas */
+/* ENLACES POR ZONA */
 header nav ul li a {
-    color: #ffffff;
+    color: var(--color-enlace-header);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: var(--peso-fuerte);
 }
 
 aside ul li a {
-    color: #009933;
+    color: var(--color-enlace-aside);
     text-decoration: underline;
 }
 
 footer ul li a {
-    color: #aa00aa;
+    color: var(--color-enlace-footer);
     text-decoration: underline;
 }
 
-/* Botones */
+/*  BOTONES  */
 .btn-comprar {
-    background-color: blue;
-    color: white;
-    padding: 5px 10px;
+    background-color: var(--color-btn-fondo);
+    color: var(--color-btn-texto);
+    padding: var(--espacio-xs) var(--espacio-sm);
     text-decoration: none;
     display: inline-block;
-    border-radius: 4px;
+    border-radius: var(--radio-sm);
 }
 
 .btn-comprar.destacado {
-    background-color: red;
-    color: yellow;
+    background-color: var(--color-btn-destacado-fondo);
+    color: var(--color-btn-destacado-texto);
 }
 
-/* Modelo de Caja y Fondos (Subactividad 2) */
+/*  ESTRUCTURA Y FONDOS  */
 header {
-    background-color: #222222;
-    /* NUEVA IMAGEN DE FONDO (Tecnología) */
-    background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop'); 
+    background-color: var(--color-fondo);
+    background-image:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    padding: 30px;
+    background-repeat: no-repeat;
+    padding: var(--espacio-xl);
 }
 
 main {
-    background-color: #e6f2ff;
+    background-color: var(--color-secundario);
     display: block;
-    padding: 10px;
+    padding: var(--espacio-sm);
 }
 
 aside {
-    background-color: #e6ffe6;
+    background-color: var(--color-terciario);
     display: block;
-    padding: 10px;
+    padding: var(--espacio-sm);
 }
 
 footer {
-    background-color: #333333;
-    color: white;
-    padding: 10px;
+    background-color: var(--color-fondo);
+    color: var(--color-texto-inverso);
+    padding: var(--espacio-sm);
 }
 
 article {
-    background-color: white;
-    border: 1px solid #cccccc;
-    padding: 20px; /* Aire interno */
-    margin: 15px;  /* Fuerza exterior */
+    background-color: var(--color-superficie);
+    border: var(--borde-fino);
+    padding: var(--espacio-lg);
+    margin: var(--espacio-md);
 }
 
 .precio {
-    font-weight: bold;
+    font-weight: var(--peso-fuerte);
 }
 
-header nav ul, aside ul, footer ul {
+header nav ul,
+aside ul,
+footer ul {
     list-style: none;
     padding: 0;
 }
 
 header nav ul li {
     display: inline-block;
-    margin-right: 15px;
+    margin-right: var(--espacio-md);
 }
 
 footer ul li {
     display: inline-block;
-    margin-right: 15px;
+    margin-right: var(--espacio-md);
 }
