@@ -1,0 +1,30 @@
+/* 
+   COMPONENTE: BOTONES (BEM)
+   */
+.btn {
+    background-color: var(--color-btn-fondo);
+    color: var(--color-btn-texto);
+    padding: var(--espacio-xs) var(--espacio-sm);
+    text-decoration: none;
+    display: inline-block;
+    border-radius: var(--radio-sm);
+    transition: transform 0.1s, background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--color-btn-destacado-fondo); 
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* MODIFICADOR: Botón Destacado */
+.btn--destacado {
+    background-color: var(--color-btn-destacado-fondo);
+    color: var(--color-btn-destacado-texto);
+}
+
+.btn--destacado:hover {
+    background-color: var(--color-fondo); 
+}
