@@ -43,10 +43,14 @@
 
 body {
     font-family: var(--fuente-base);
-    font-size: var(--tamano-base);
+    font-size: 0; /* Elimina espacio fantasma */
     line-height: var(--interlineado);
     color: var(--color-texto);
     margin: 0;
+}
+
+header, main, aside, footer {
+    font-size: var(--tamano-base); /* Restaura texto */
 }
 
 /* ENLACES POR ZONA */
@@ -56,7 +60,6 @@ header nav ul li a {
     font-weight: var(--peso-fuerte);
 }
 
-/* Modificado para la interactividad del Aside */
 aside ul li a {
     color: var(--color-enlace-aside);
     text-decoration: none;
@@ -66,19 +69,16 @@ aside ul li a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Pseudoelemento ::before en Aside */
 aside ul li a::before {
     content: "• ";
     font-weight: bold;
 }
 
-/* Pseudoclase :hover en Aside */
 aside ul li a:hover {
     background-color: var(--color-enlace-aside);
     color: var(--color-texto-inverso);
 }
 
-/* Pseudoclase :focus en Aside */
 aside ul li a:focus {
     outline: 2px solid var(--color-enlace-aside);
     outline-offset: 2px;
@@ -105,7 +105,6 @@ footer ul li a {
     color: var(--color-btn-destacado-texto);
 }
 
-/* Pseudoclases :hover y :active en Botones */
 .btn-comprar:hover {
     background-color: #0d47a1;
 }
@@ -130,16 +129,42 @@ header {
     padding: var(--espacio-xl);
 }
 
+/* MAIN: Ocupa todo el ancho para que los productos estén solos arriba */
 main {
     background-color: var(--color-secundario);
-    display: block;
+    display: block; 
+    width: 100%;
     padding: var(--espacio-sm);
 }
 
+/* ASIDE: Ahora es una barra inferior */
 aside {
     background-color: var(--color-terciario);
     display: block;
-    padding: var(--espacio-sm);
+    width: 100%;
+    padding: var(--espacio-md);
+    text-align: center; /* Centra los filtros */
+    border-top: 2px solid var(--color-borde);
+}
+
+/* Título y lista de filtros uno al lado del otro */
+aside h2 {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: var(--espacio-lg);
+    font-size: 20px;
+}
+
+aside ul {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0; /* Elimina espacio entre los <li> */
+}
+
+aside ul li {
+    display: inline-block;
+    font-size: var(--tamano-base); /* Restaura tamaño */
+    margin: 0 var(--espacio-sm);
 }
 
 footer {
@@ -148,16 +173,38 @@ footer {
     padding: var(--espacio-sm);
 }
 
-/* Modificado para la decoración del producto */
+/* --- LOS 4 PRODUCTOS EN UNA SOLA FILA --- */
+section {
+    font-size: 0; /* Elimina espacio entre productos */
+    text-align: center; /* Centra los productos */
+}
+
+section h1 {
+    font-size: 24px; 
+    margin-bottom: var(--espacio-md);
+    text-align: left;
+}
+
 article {
     background-color: var(--color-superficie);
     border: var(--borde-fino);
-    padding: var(--espacio-lg);
-    margin: var(--espacio-md);
+    padding: var(--espacio-md);
+    
+    /* Magia para 4 en fila */
+    display: inline-block; 
+    vertical-align: top;
+    width: 23%; /* 23% x 4 = 92% + (1%x8 márgenes) = 100% */
+    margin: 1%;
+    height: 480px; /* Altura fija para que todos midan exactamente igual */
+    padding-bottom: 220px; /* Espacio reservado para la imagen abajo */
+    
+    font-size: var(--tamano-base); 
     position: relative;
+    text-align: left; /* El texto vuelve a la izquierda */
+    transition: background-color 0.3s;
 }
 
-/* Pseudoelemento ::after en Article */
+/* Etiqueta de oferta */
 article::after {
     content: "¡Oferta!";
     position: absolute;
@@ -175,24 +222,28 @@ article::after {
     font-weight: var(--peso-fuerte);
 }
 
-header nav ul,
-aside ul,
-footer ul {
+header nav ul {
     list-style: none;
     padding: 0;
+    font-size: 0;
 }
 
 header nav ul li {
     display: inline-block;
     margin-right: var(--espacio-md);
+    font-size: var(--tamano-base);
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0;
 }
 
 footer ul li {
     display: inline-block;
     margin-right: var(--espacio-md);
-}
-article {
-    transition: background-color 0.3s; 
+    font-size: var(--tamano-base);
 }
 
 article:hover {
@@ -200,40 +251,23 @@ article:hover {
     border-color: var(--color-enlace-aside); 
 }
 
-
-.btn-comprar {
-    transition: background-color 0.3s; 
-}
-
 .btn-comprar:hover {
     background-color: var(--color-btn-destacado-fondo); 
 }
-
 
 .btn-comprar.destacado:hover {
     background-color: var(--color-fondo); 
 }
 
-
-
-
-
-/* --- Estilos específicos para la imagen --- */
+/* --- IMÁGENES (Ancladas al fondo para que queden alineadas) --- */
 .img-producto {
-  display: block;
-  margin: 30px auto;      /* Centra la imagen y le da margen arriba/abajo */
-  
-  /* Mantiene la simetría y evita que se deformen */
-  width: 550px;           /* Ancho fijo para todas */
-  height: 550px;          /* Alto fijo para todas */
-  object-fit: contain;    /* Ajusta la imagen dentro del cuadro sin recortarla ni deformarla */
-  
-  /* Opcional: fondo gris claro para que resalten las imágenes con fondo transparente */
-  background-color: #f9f9f9; 
-  border-radius: 4px;
+    display: block;
+    position: absolute; /* Anclada al fondo de la tarjeta */
+    bottom: 15px; 
+    left: 15px;
+    width: calc(100% - 30px); /* Ajuste para los paddings */
+    height: 180px; 
+    object-fit: contain; /* Evita que se deformen */
+    background-color: #f9f9f9; 
+    border-radius: var(--radio-sm);
 }
-
-
-
-
-
