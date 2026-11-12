@@ -7,13 +7,16 @@
     padding: var(--espacio-md);
     border-radius: var(--radio-sm);
     
-    /* Motor Flexbox para la tarjeta */
+    /* Estas son las propiedades que hacen el stretch */
     display: flex;
     flex-direction: column;
-    height: 100%; /* Se estira para igualar el alto de la tarjeta vecina */
+    flex: 1; 
+    height: 100%; 
+    align-self: stretch;
     
-    /* Dimensiones */
+    /* Tamaño para que quepan bien */
     width: 100%;
+    min-width: 200px; 
     max-width: 260px; 
     
     position: relative;

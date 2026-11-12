@@ -72,10 +72,10 @@ body {
 }
 
 .main-wrapper {
-    display: flex; /* Pone el aside y el main lado a lado */
-    flex: 1; /* Absorbe el espacio sobrante empujando el footer al fondo */
+    display: flex;
+    flex-direction: column; /* <--- CAMBIO AQUÍ: Ahora se apilan verticalmente */
+    flex: 1; 
 }
-
 /* 
    HEADER
     */
@@ -119,9 +119,12 @@ body {
 
 .catalog {
     display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas bajen de línea en pantallas pequeñas */
-    justify-content: center; /* Centra las tarjetas en el contenedor */
+    flex-wrap: wrap; 
+    justify-content: center; 
     gap: var(--espacio-md);
+    
+    /* Esta línea hace que el contenedor estire a las tarjetas */
+    align-items: stretch; 
 }
 
 .catalog__title {
@@ -136,11 +139,11 @@ body {
     */
 .sidebar {
     background-color: var(--color-terciario);
-    width: 250px;
+    width: 100%; /* <--- CAMBIO AQUÍ: Ocupa todo el ancho */
     padding: var(--espacio-md);
-    border-left: 2px solid var(--color-borde);
+    border-left: none; /* Quitamos el borde izquierdo */
+    border-top: 2px solid var(--color-borde); /* Borde arriba para separarlo del main */
     
-    /* Flexbox vertical para los filtros */
     display: flex;
     flex-direction: column;
     gap: var(--espacio-lg);
@@ -207,12 +210,13 @@ body {
     color: var(--color-enlace-footer);
     text-decoration: underline;
 }
-.card__price-old {
-    text-decoration: line-through;
-    color: #888;
-    font-size: 0.9em;
-    margin: 0;
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espacio-md);
     
-    /* NUEVO: Usamos align-self para mandar este texto específico al fondo de la caja */
-    align-self: flex-end; 
+    /* Esto obliga a los hijos a estirarse al alto máximo de la línea */
+    align-items: stretch; 
 }
