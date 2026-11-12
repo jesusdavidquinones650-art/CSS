@@ -1,66 +1,163 @@
+/* 
+   IMPORTACIÓN DE MÓDULOS
+    */
+@import url('css/botones.css');
+@import url('css/tarjetas.css');
+
+/* 
+   VARIABLES GLOBALES (CUSTOM PROPERTIES)
+    */
 :root {
-    /* COLORES  */
+    /* COLORES */
     --color-principal: #222222;
     --color-secundario: #e6f2ff;
     --color-terciario: #e6ffe6;
     --color-fondo: #333333;
-
     --color-texto: #333333;
     --color-texto-inverso: #ffffff;
     --color-borde: #cccccc;
     --color-superficie: #ffffff;
 
+    /* COLORES DE ENLACES */
     --color-enlace-header: #ffffff;
     --color-enlace-aside: #009933;
     --color-enlace-footer: #e0a0e0;
 
+    /* COLORES DE BOTONES */
     --color-btn-fondo: #1565c0;
     --color-btn-texto: #ffffff;
     --color-btn-destacado-fondo: #c62828;
     --color-btn-destacado-texto: #ffeb3b;
 
-    /*TIPOGRAFÍA*/
+    /* TIPOGRAFÍA */
     --fuente-base: sans-serif;
     --tamano-base: 16px;
     --interlineado: 1.5;
     --peso-fuerte: bold;
 
-    /* ESPACIADO  */
+    /* ESPACIADO */
     --espacio-xs: 5px;
     --espacio-sm: 10px;
     --espacio-md: 15px;
     --espacio-lg: 20px;
     --espacio-xl: 30px;
 
-    /* BORDES Y RADIOS  */
+    /* BORDES Y RADIOS */
     --borde-fino: 1px solid var(--color-borde);
     --radio-sm: 4px;
 }
 
+/* 
+   RESETEO BÁSICO
+    */
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 body {
     font-family: var(--fuente-base);
-    font-size: 0; /* Elimina espacio fantasma */
+    font-size: var(--tamano-base);
     line-height: var(--interlineado);
     color: var(--color-texto);
     margin: 0;
 }
 
-header, main, aside, footer {
-    font-size: var(--tamano-base); /* Restaura texto */
+/* 
+   LAYOUT GLOBAL (FLEXBOX MACRO)
+    */
+.app-layout {
+    display: flex;
+    flex-direction: column; /* Apila header, main-wrapper y footer */
+    min-height: 100vh; /* Ocupa el 100% del alto de la pantalla */
 }
 
-/* ENLACES POR ZONA */
-header nav ul li a {
+.main-wrapper {
+    display: flex; /* Pone el aside y el main lado a lado */
+    flex: 1; /* Absorbe el espacio sobrante empujando el footer al fondo */
+}
+
+/* 
+   HEADER
+    */
+.header {
+    background-color: var(--color-fondo);
+    background-image: 
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), 
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    padding: var(--espacio-xl);
+    
+    /* Flexbox para el header */
+    display: flex;
+    justify-content: space-between; /* Separa logo/nav a los extremos */
+    align-items: center; /* Centra verticalmente */
+}
+
+.header__list {
+    display: flex;
+    gap: var(--espacio-md); /* Separación uniforme entre enlaces */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header__link {
     color: var(--color-enlace-header);
     text-decoration: none;
     font-weight: var(--peso-fuerte);
 }
 
-aside ul li a {
+/* 
+   MAIN Y CATÁLOGO
+    */
+.main-content {
+    background-color: var(--color-secundario);
+    flex: 1; /* Ocupa todo el ancho restante */
+    padding: var(--espacio-md);
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas bajen de línea en pantallas pequeñas */
+    justify-content: center; /* Centra las tarjetas en el contenedor */
+    gap: var(--espacio-md);
+}
+
+.catalog__title {
+    width: 100%; /* Fuerza al título a ocupar su propia línea */
+    font-size: 24px; 
+    margin-bottom: var(--espacio-sm);
+    text-align: left;
+}
+
+/* 
+   ASIDE (SIDEBAR)
+    */
+.sidebar {
+    background-color: var(--color-terciario);
+    width: 250px;
+    padding: var(--espacio-md);
+    border-left: 2px solid var(--color-borde);
+    
+    /* Flexbox vertical para los filtros */
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-lg);
+}
+
+.sidebar__title { margin: 0; font-size: 20px; }
+
+.sidebar__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-sm);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar__link {
     color: var(--color-enlace-aside);
     text-decoration: none;
     display: block;
@@ -69,205 +166,53 @@ aside ul li a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-aside ul li a::before {
+.sidebar__link::before {
     content: "• ";
     font-weight: bold;
 }
 
-aside ul li a:hover {
+.sidebar__link:hover {
     background-color: var(--color-enlace-aside);
     color: var(--color-texto-inverso);
 }
 
-aside ul li a:focus {
+.sidebar__link:focus {
     outline: 2px solid var(--color-enlace-aside);
     outline-offset: 2px;
 }
 
-footer ul li a {
+/* 
+   FOOTER
+    */
+.footer {
+    background-color: var(--color-fondo);
+    color: var(--color-texto-inverso);
+    padding: var(--espacio-md);
+    
+    /* Flexbox para el footer */
+    display: flex;
+    justify-content: space-around; /* Reparte los elementos equitativamente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.footer__list {
+    display: flex;
+    gap: var(--espacio-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer__link {
     color: var(--color-enlace-footer);
     text-decoration: underline;
 }
-
-/*  BOTONES  */
-.btn-comprar {
-    background-color: var(--color-btn-fondo);
-    color: var(--color-btn-texto);
-    padding: var(--espacio-xs) var(--espacio-sm);
-    text-decoration: none;
-    display: inline-block;
-    border-radius: var(--radio-sm);
-    transition: transform 0.1s, background-color 0.3s;
-}
-
-.btn-comprar.destacado {
-    background-color: var(--color-btn-destacado-fondo);
-    color: var(--color-btn-destacado-texto);
-}
-
-.btn-comprar:hover {
-    background-color: #0d47a1;
-}
-
-.btn-comprar.destacado:hover {
-    background-color: #b71c1c;
-}
-
-.btn-comprar:active {
-    transform: scale(0.95);
-}
-
-/*  ESTRUCTURA Y FONDOS  */
-header {
-    background-color: var(--color-fondo);
-    background-image:
-        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: var(--espacio-xl);
-}
-
-/* MAIN: Ocupa todo el ancho para que los productos estén solos arriba */
-main {
-    background-color: var(--color-secundario);
-    display: block; 
-    width: 100%;
-    padding: var(--espacio-sm);
-}
-
-/* ASIDE: Ahora es una barra inferior */
-aside {
-    background-color: var(--color-terciario);
-    display: block;
-    width: 100%;
-    padding: var(--espacio-md);
-    text-align: center; /* Centra los filtros */
-    border-top: 2px solid var(--color-borde);
-}
-
-/* Título y lista de filtros uno al lado del otro */
-aside h2 {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: var(--espacio-lg);
-    font-size: 20px;
-}
-
-aside ul {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0; /* Elimina espacio entre los <li> */
-}
-
-aside ul li {
-    display: inline-block;
-    font-size: var(--tamano-base); /* Restaura tamaño */
-    margin: 0 var(--espacio-sm);
-}
-
-footer {
-    background-color: var(--color-fondo);
-    color: var(--color-texto-inverso);
-    padding: var(--espacio-sm);
-}
-
-/* --- LOS 4 PRODUCTOS EN UNA SOLA FILA --- */
-section {
-    font-size: 0; /* Elimina espacio entre productos */
-    text-align: center; /* Centra los productos */
-}
-
-section h1 {
-    font-size: 24px; 
-    margin-bottom: var(--espacio-md);
-    text-align: left;
-}
-
-article {
-    background-color: var(--color-superficie);
-    border: var(--borde-fino);
-    padding: var(--espacio-md);
+.card__price-old {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 0.9em;
+    margin: 0;
     
-    /* Magia para 4 en fila */
-    display: inline-block; 
-    vertical-align: top;
-    width: 23%; /* 23% x 4 = 92% + (1%x8 márgenes) = 100% */
-    margin: 1%;
-    height: 480px; /* Altura fija para que todos midan exactamente igual */
-    padding-bottom: 220px; /* Espacio reservado para la imagen abajo */
-    
-    font-size: var(--tamano-base); 
-    position: relative;
-    text-align: left; /* El texto vuelve a la izquierda */
-    transition: background-color 0.3s;
-}
-
-/* Etiqueta de oferta */
-article::after {
-    content: "¡Oferta!";
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: var(--color-btn-destacado-fondo);
-    color: var(--color-texto-inverso);
-    padding: 2px 8px;
-    font-size: 12px;
-    font-weight: var(--peso-fuerte);
-    border-radius: 10px;
-}
-
-.precio {
-    font-weight: var(--peso-fuerte);
-}
-
-header nav ul {
-    list-style: none;
-    padding: 0;
-    font-size: 0;
-}
-
-header nav ul li {
-    display: inline-block;
-    margin-right: var(--espacio-md);
-    font-size: var(--tamano-base);
-}
-
-footer ul {
-    list-style: none;
-    padding: 0;
-    font-size: 0;
-}
-
-footer ul li {
-    display: inline-block;
-    margin-right: var(--espacio-md);
-    font-size: var(--tamano-base);
-}
-
-article:hover {
-    background-color: var(--color-terciario); 
-    border-color: var(--color-enlace-aside); 
-}
-
-.btn-comprar:hover {
-    background-color: var(--color-btn-destacado-fondo); 
-}
-
-.btn-comprar.destacado:hover {
-    background-color: var(--color-fondo); 
-}
-
-/* --- IMÁGENES (Ancladas al fondo para que queden alineadas) --- */
-.img-producto {
-    display: block;
-    position: absolute; /* Anclada al fondo de la tarjeta */
-    bottom: 15px; 
-    left: 15px;
-    width: calc(100% - 30px); /* Ajuste para los paddings */
-    height: 180px; 
-    object-fit: contain; /* Evita que se deformen */
-    background-color: #f9f9f9; 
-    border-radius: var(--radio-sm);
+    /* NUEVO: Usamos align-self para mandar este texto específico al fondo de la caja */
+    align-self: flex-end; 
 }

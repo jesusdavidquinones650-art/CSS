@@ -1,79 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catalogo</title>
-  <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - Proyecto SENA</title>
+    <!-- Enlace al CSS principal que a su vez importa los módulos -->
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="#">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
+    <!-- 
+         LAYOUT GLOBAL (Contenedor principal de toda la app)
+          -->
+    <div class="app-layout">
+        
+        <!-- 
+             HEADER: Cabecera con navegación
+              -->
+        <header class="header">
+            <nav class="header__nav">
+                <ul class="header__list">
+                    <li class="header__item"><a href="#" class="header__link">Inicio</a></li>
+                    <li class="header__item"><a href="#" class="header__link">Productos</a></li>
+                    <li class="header__item"><a href="#" class="header__link">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
 
-  <main>
-    <section>
-      <h1>Catalogo</h1>
+        <!-- 
+             MAIN-WRAPPER: Envuelve el contenido central (Main + Aside)
+              -->
+        <div class="main-wrapper">
+            
+            <!-- MAIN: Catálogo de productos -->
+            <main class="main-content">
+                <section class="catalog">
+                    <h1 class="catalog__title">Catálogo</h1>
+                    
+                    <!-- TARJETA 1: Teclado -->
+                    <article class="card">
+                        <div class="card__body">
+                            <h2 class="card__title">Teclado Mecánico</h2>
+                            <p class="card__desc">Teclado con switches azules y luces RGB.</p>
+                        </div>
+                        <div class="card__price-wrapper">
+                            <p class="card__price">$150.000</p>
+                            <p class="card__price-old">$180.000</p>
+                        </div>
+                        <a href="#" class="btn card__button">Comprar</a>
+                        <img src="Recursos/teclado.jpg" alt="Teclado Mecánico" class="card__image">
+                    </article>
 
-      <article>
-        <h2>Teclado Mecanico</h2>
-        <p>Teclado con switches azules y luces RGB.</p>
-        <p class="precio">$150.000</p>
-        <a href="#" class="btn-comprar">Comprar</a>
-        <img src="Recursos/teclado.jpg" alt="Teclado Mecanico" class="img-producto">
-      </article>
+                    <!-- TARJETA 2: Mouse (Con modificador BEM --destacada) -->
+                    <article class="card card--destacada">
+                        <div class="card__body">
+                            <h2 class="card__title">Mouse Gamer</h2>
+                            <p class="card__desc">Mouse con 6 botones programables y alta sensibilidad.</p>
+                        </div>
+                        <div class="card__price-wrapper">
+                            <p class="card__price">$80.000</p>
+                            <p class="card__price-old">$100.000</p>
+                        </div>
+                        <a href="#" class="btn btn--destacado card__button">Comprar</a>
+                        <img src="Recursos/mouse.jpg" alt="Mouse Gamer" class="card__image">
+                    </article>
 
-      <article>
-        <h2>Mouse Gamer</h2>
-        <p>Mouse con 6 botones programables y alta sensibilidad.</p>
-        <p class="precio">$80.000</p>
-        <a href="#" class="btn-comprar destacado">Comprar</a>
-        <img src="Recursos/mouse.jpg" alt="Mouse Gamer" class="img-producto">
-      </article>
+                    <!-- TARJETA 3: Diadema -->
+                    <article class="card">
+                        <div class="card__body">
+                            <h2 class="card__title">Diadema</h2>
+                            <p class="card__desc">Audífonos con micrófono incluido y sonido envolvente.</p>
+                        </div>
+                        <div class="card__price-wrapper">
+                            <p class="card__price">$120.000</p>
+                        </div>
+                        <a href="#" class="btn card__button">Comprar</a>
+                        <img src="Recursos/diadema.jpg" alt="Diadema" class="card__image">
+                    </article>
 
-      <article>
-        <h2>Diadema</h2>
-        <p>Audifonos con microfono incluido y sonido envolvente.</p>
-        <p class="precio">$120.000</p>
-        <a href="#" class="btn-comprar">Comprar</a>
-        <img src="Recursos/diadema.jpg" alt="Diadema" class="img-producto">
-      </article>
+                    <!-- TARJETA 4: Pad Mouse -->
+                    <article class="card">
+                        <div class="card__body">
+                            <h2 class="card__title">Pad Mouse</h2>
+                            <p class="card__desc">Almohadilla grande de tela para mayor comodidad.</p>
+                        </div>
+                        <div class="card__price-wrapper">
+                            <p class="card__price">$30.000</p>
+                        </div>
+                        <a href="#" class="btn card__button">Comprar</a>
+                        <img src="Recursos/padmouse.jpg" alt="Pad Mouse" class="card__image">
+                    </article>
 
-      <article>
-        <h2>Pad Mouse</h2>
-        <p>Almohadilla grande de tela para mayor comodidad.</p>
-        <p class="precio">$30.000</p>
-        <a href="#" class="btn-comprar">Comprar</a>
-        <img src="Recursos/padmouse.jpg" alt="Pad Mouse" class="img-producto">
-      </article>
+                </section>
+            </main>
 
-    </section>
-  </main>
+            <!-- ASIDE: Menú lateral de filtros -->
+            <aside class="sidebar">
+                <h2 class="sidebar__title">Filtros</h2>
+                <ul class="sidebar__list">
+                    <li class="sidebar__item"><a href="#" class="sidebar__link">Ver todo</a></li>
+                    <li class="sidebar__item"><a href="#" class="sidebar__link">Teclados</a></li>
+                    <li class="sidebar__item"><a href="#" class="sidebar__link">Mouses</a></li>
+                    <li class="sidebar__item"><a href="#" class="sidebar__link">Audio</a></li>
+                </ul>
+            </aside>
 
-  <aside>
-    <h2>Filtros</h2>
-    <ul>
-      <li><a href="#">Ver todo</a></li>
-      <li><a href="#">Teclados</a></li>
-      <li><a href="#">Mouses</a></li>
-      <li><a href="#">Audio</a></li>
-    </ul>
-  </aside>
+        </div> <!-- Cierra main-wrapper -->
 
-  <footer>
-    <p>Derechos de autor 2026</p>
-    <ul>
-      <li><a href="#">Facebook</a></li>
-      <li><a href="#">Instagram</a></li>
-    </ul>
-  </footer>
+        <!-- 
+             FOOTER: Pie de página
+              -->
+        <footer class="footer">
+            <p class="footer__text">Derechos de autor 2026</p>
+            <ul class="footer__list">
+                <li class="footer__item"><a href="#" class="footer__link">Facebook</a></li>
+                <li class="footer__item"><a href="#" class="footer__link">Instagram</a></li>
+            </ul>
+        </footer>
+
+    </div> <!-- Cierra app-layout -->
 
 </body>
 </html>

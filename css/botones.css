@@ -1,5 +1,5 @@
 /* 
-   COMPONENTE: BOTONES (BEM)
+   COMPONENTE: BOTONES
    */
 .btn {
     background-color: var(--color-btn-fondo);
@@ -11,20 +11,22 @@
     transition: transform 0.1s, background-color 0.3s;
 }
 
-.btn:hover {
+/* Estado al pasar el ratón */
+.btn:hover { 
     background-color: var(--color-btn-destacado-fondo); 
 }
 
-.btn:active {
-    transform: scale(0.95);
+/* Estado al hacer clic */
+.btn:active { 
+    transform: scale(0.95); 
 }
 
-/* MODIFICADOR: Botón Destacado */
+/* Modificador: Botón Destacado */
 .btn--destacado {
     background-color: var(--color-btn-destacado-fondo);
     color: var(--color-btn-destacado-texto);
 }
 
-.btn--destacado:hover {
+.btn--destacado:hover { 
     background-color: var(--color-fondo); 
 }
