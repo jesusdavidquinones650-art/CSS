@@ -90,6 +90,31 @@ El objetivo de esta fase fue dejar de tener un archivo CSS monolítico y desorde
 3.  **¿Cómo esta metodología evita la guerra de especificidad (Cascada) al mantener un peso plano?**
     Porque BEM prohíbe el uso de selectores anidados profundos (como `.main article h2`). Al usar una única clase plana por regla (ej. `.card__title`), la especificidad se mantiene siempre baja y predecible (peso 10). Esto significa que ninguna regla "pisa" a otra por accidente debido a la jerarquía del HTML, y los modificadores (como `--destacada`) se aplican de forma limpia sin necesidad de usar `!important`.
 
+S## Subactividad 6: Construir layouts unidimensionales modernos (Flexbox)
+
+El objetivo de esta fase fue dar el salto a un diseño elástico y profesional utilizando Flexbox. Se reemplazó el uso de `inline-block`, `floats` y posiciones absolutas por un sistema de distribución flexible (ejes y gravedad), logrando que la interfaz se adapte a diferentes tamaños de pantalla y que los componentes se alineen milimétricamente.
+
+### Acciones realizadas:
+*   **Macro-arquitectura (Layout Global):** Se creó el contenedor `.app-layout` con `display: flex; flex-direction: column; min-height: 100vh;` para estructurar la página. A su vez, se creó `.main-wrapper` con `display: flex; flex: 1;` para colocar el menú lateral y el catálogo lado a lado, absorbiendo el espacio central.
+*   **Cabecera (`.header`):** Se aplicó `display: flex; justify-content: space-between; align-items: center;` para separar el logo y el menú. A la lista de navegación (`.header__list`) se le aplicó `display: flex; gap: var(--espacio-md);` para alinear los enlaces horizontalmente sin usar márgenes.
+*   **Panel lateral (`.sidebar`):** Se aplicó `display: flex; flex-direction: column; gap: var(--espacio-lg);` para distribuir los filtros verticalmente con espacios perfectos.
+*   **Pie de página (`.footer`):** Se aplicó `display: flex; justify-content: space-around; align-items: center;` para repartir los elementos (textos y enlaces) equitativamente en la zona inferior.
+*   **Tarjetas de producto (`.card`):** Se aplicó `display: flex; flex-direction: column; height: 100%;` para garantizar que todas las tarjetas midan exactamente lo mismo. Al contenedor del texto (`.card__body`) se le aplicó `flex-grow: 1;` para empujar el botón de compra hacia el fondo. Finalmente, al contenedor de precios (`.card__price-wrapper`) se le aplicó un micro-flexbox (`justify-content: space-between; align-items: baseline;`) para alinear el precio de oferta y el precio tachado.
+*   **Catálogo (`.catalog`):** Se aplicó `display: flex; flex-wrap: wrap; justify-content: center; gap: var(--espacio-md);` para permitir que las tarjetas salten de línea en pantallas pequeñas de forma automática (diseño responsive).
+
+### Hallazgos: Arquitectura Total con Flexbox
+
+1. **¿Por qué fue crucial aplicar `min-height: 100vh` y `flex-direction: column` al contenedor global para controlar el pie de página?**
+   Porque esto garantiza que la página siempre ocupe como mínimo el 100% del alto de la pantalla del usuario, sin importar si hay mucho o poco contenido. Al usar `flex-direction: column` en el `.app-layout`, los elementos se apilan verticalmente. Luego, al darle `flex: 1` al `.main-wrapper`, este actúa como un resorte que absorbe todo el espacio sobrante. El resultado es que el footer siempre queda anclado milimétricamente al fondo de la ventana y nunca flota en la mitad de la pantalla (conocido como *sticky footer*).
+
+2. **¿Cómo la propiedad `gap` reemplazó el uso excesivo de márgenes laterales en los menús de navegación?**
+   Antes, para separar los enlaces (como los del header o el aside), teníamos que usar `margin-right` o `margin-bottom` en cada elemento hijo. Eso ensuciaba el código y a veces generaba un margen extra no deseado en el último elemento. Con `gap`, ahora el contenedor padre es el único que se encarga de calcular el espacio exacto entre los elementos. Esto hace que el código sea mucho más limpio, fácil de modificar y garantiza una separación perfecta y simétrica.
+
+3. **¿Cómo la unión de BEM, Custom Properties y Flexbox te permitió crear una tarjeta de producto resistente a diferentes longitudes de texto?**
+   * **BEM** nos dio nombres de clases claros y predecibles (como `.card__body`) que no chocan con otros elementos.
+   * **Custom Properties** (variables) mantuvieron los colores y espacios unificados y fáciles de cambiar.
+   * **Flexbox** resolvió el problema del tamaño variable: al aplicar `display: flex; flex-direction: column` a la tarjeta y `flex-grow: 1` a su cuerpo de texto (`.card__body`), logramos que, sin importar si el título o la descripción son cortos o largos, el texto siempre ocupe el espacio disponible y empuje el botón de "Comprar" hacia el borde inferior. Así, todas las tarjetas mantienen la misma altura y los botones quedan perfectamente alineados en fila.
+
 ## Comandos de Git Utilizados
 
 Para respaldar el avance técnico de ambas subactividades, se ejecutaron los siguientes comandos en la terminal:
@@ -127,3 +152,9 @@ git commit -m "refactor(html): aplicar nomenclatura BEM en los componentes del c
 git add .
 git commit -m "refactor(styles): actualizar modulos css con clases BEM planas y documentar hallazgos"
 git push origin feature/arquitectura-bem
+
+# Subactividad 6
+git checkout -b feature/arquitectura-flexbox
+git add .
+git commit -m "feat(layout): implementar arquitectura total flexbox en todas las vistas y componentes del proyecto"
+git push origin feature/arquitectura-flexbox
