@@ -1,0 +1,68 @@
+/* 
+   COMPONENTE: TARJETAS DE PRODUCTO (BEM)
+    */
+.card {
+    background-color: var(--color-superficie);
+    border: var(--borde-fino);
+    padding: var(--espacio-md);
+    display: inline-block; 
+    vertical-align: top;
+    width: 23%; 
+    margin: 1%;
+    height: 480px; 
+    padding-bottom: 220px; 
+    font-size: var(--tamano-base); 
+    position: relative;
+    text-align: left; 
+    transition: background-color 0.3s;
+}
+
+.card:hover {
+    background-color: var(--color-terciario); 
+    border-color: var(--color-enlace-aside); 
+}
+
+/* Etiqueta de oferta */
+.card::after {
+    content: "¡Oferta!";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--color-btn-destacado-fondo);
+    color: var(--color-texto-inverso);
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: var(--peso-fuerte);
+    border-radius: 10px;
+}
+
+/* ELEMENTOS */
+.card__title {
+    font-size: 1.5em;
+    margin-top: 0;
+}
+
+.card__desc {
+    margin-bottom: var(--espacio-sm);
+}
+
+.card__price {
+    font-weight: var(--peso-fuerte);
+}
+
+.card__image {
+    display: block;
+    position: absolute;
+    bottom: 15px; 
+    left: 15px;
+    width: calc(100% - 30px); 
+    height: 180px; 
+    object-fit: contain; 
+    background-color: #f9f9f9; 
+    border-radius: var(--radio-sm);
+}
+
+/* MODIFICADOR: Tarjeta Destacada */
+.card--destacada {
+    border: 2px solid var(--color-btn-destacado-fondo);
+}
