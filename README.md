@@ -50,6 +50,46 @@ El objetivo fue dejar de ver el HTML como textos flotantes y entenderlo como caj
 *   Se reemplazaron todos los valores "quemados" (hardcoded) del CSS por la función `var()`. 
 *   **Beneficio:** Si el cliente pide cambiar la paleta de colores o la separación de los productos, ahora solo se modifica la variable en `:root` y toda la interfaz se actualiza automáticamente sin riesgo de dejar espacios desiguales.
 
+## Subactividad 4: Programar la interactividad y decoración visual
+
+El objetivo de esta fase fue darle vida al catálogo aplicando microinteracciones y decoraciones virtuales. Se utilizaron pseudoclases para reaccionar a los eventos del usuario (como el cursor o el teclado) y pseudoelementos para inyectar detalles visuales desde el CSS, manteniendo el HTML limpio y semántico.
+
+### Acciones realizadas:
+*   **Menú lateral (`<aside>`):** Se aplicó `:hover` a los enlaces de filtrado para cambiar su fondo y texto suavemente. Se inyectó un punto decorativo antes de cada categoría usando `::before { content: "• "; }`. Además, se añadió la pseudoclase `:focus` con un `outline` visible usando las variables del `:root` para mejorar la accesibilidad.
+*   **Catálogo de productos (`<main>`):** Se aplicó `:hover` (cambio de color) y `:active` (efecto de hundimiento con `transform: scale()`) a los botones de compra. Se utilizó el pseudoelemento `::after` en el contenedor `<article>` para inyectar una insignia virtual con la palabra "¡Oferta!", usando los colores definidos en las variables globales.
+*   **Auditoría:** Se inspeccionaron los estados en las DevTools del navegador para verificar cómo se inyectan los bloques `::before` y `::after` en el DOM virtual.
+
+### Hallazgos: Pseudoclases y Pseudoelementos
+
+1.  **Diferencia funcional entre una pseudoclase y un pseudoelemento:**
+    La pseudoclase (como `:hover` o `:focus`) se utiliza para definir el **estado** de un elemento cuando el usuario interactúa con él. El pseudoelemento (como `::before` o `::after`) se utiliza para **inyectar contenido decorativo** en el DOM virtual (como texto, iconos o formas) sin necesidad de agregar etiquetas HTML reales.
+2.  **Importancia técnica de la pseudoclase `:focus` para la accesibilidad:**
+    Es fundamental porque permite que las personas que navegan usando el teclado (presionando la tecla Tab) sepan exactamente en qué enlace o botón se encuentran ubicados. Un contorno visible (`outline`) garantiza que la web sea inclusiva y fácil de usar para todos, cumpliendo con las buenas prácticas de accesibilidad web.
+3.  **¿Por qué es buena práctica inyectar elementos decorativos desde CSS en lugar de ensuciar el HTML?**
+    Porque mantiene la separación de responsabilidades (HTML para estructura, CSS para diseño). Si mañana la etiqueta "¡Oferta!" cambia de diseño, de color o decide quitarse, solo se modifica el CSS sin tener que alterar el documento HTML. Además, si un usuario con un lector de pantalla accede al sitio, el CSS puede ignorar el contenido decorativo, evitando que el lector lea cosas sin sentido (como "viñeta" o "oferta") interrumpiendo la experiencia.
+
+
+
+## Subactividad 5: Refactorizar la arquitectura (Modularidad y BEM)
+
+El objetivo de esta fase fue dejar de tener un archivo CSS monolítico y desordenado, para pasar a una arquitectura escalable, predecible y lista para el trabajo en equipo, aplicando el estándar de nomenclatura BEM (Block, Element, Modifier) y dividiendo los estilos en módulos.
+
+### Acciones realizadas:
+*   Se creó la carpeta `css/` para alojar los módulos independientes de los componentes repetitivos: `botones.css` y `tarjetas.css`.
+*   Se conectaron estos módulos al archivo maestro `estilos.css` utilizando la regla `@import` al inicio del documento.
+*   Se reescribió el HTML aplicando nomenclatura BEM estricta, eliminando clases genéricas propensas a colisiones (ej. de `.img-producto` a `.card__image`, o de `.btn-comprar` a `.btn`).
+*   Se implementaron modificadores semánticos (usando doble guion medio `--`) para variaciones visuales, como `.card--destacada` y `.btn--destacado`.
+*   Se actualizaron los selectores en los nuevos archivos CSS, aplanando la especificidad y reemplazando los selectores anidados antiguos por clases BEM directas, manteniendo el uso de las variables globales del `:root`.
+
+### Hallazgos: Arquitectura BEM y Modularidad
+
+1.  **¿Qué significa la sigla BEM y cómo se escribe visualmente?**
+    BEM significa **Block, Element, Modifier** (Bloque, Elemento, Modificador). Visualmente se escribe utilizando doble guion bajo (`__`) para separar los elementos del bloque, y doble guion medio (`--`) para denotar los modificadores. Por ejemplo: `.card` (bloque), `.card__title` (elemento) y `.card--destacada` (modificador).
+2.  **¿Por qué dividir el CSS en varios archivos facilita el trabajo colaborativo?**
+    Porque permite que varios desarrolladores trabajen simultáneamente en diferentes partes del diseño (ej. uno en botones, otro en tarjetas) sin generar conflictos en Git ni pisarse el código. Además, hace que el proyecto sea mucho más fácil de leer, depurar y escalar, ya que si se daña un botón, sabemos exactamente en qué archivo buscar y no en una hoja de miles de líneas.
+3.  **¿Cómo esta metodología evita la guerra de especificidad (Cascada) al mantener un peso plano?**
+    Porque BEM prohíbe el uso de selectores anidados profundos (como `.main article h2`). Al usar una única clase plana por regla (ej. `.card__title`), la especificidad se mantiene siempre baja y predecible (peso 10). Esto significa que ninguna regla "pisa" a otra por accidente debido a la jerarquía del HTML, y los modificadores (como `--destacada`) se aplican de forma limpia sin necesidad de usar `!important`.
+
 ## Comandos de Git Utilizados
 
 Para respaldar el avance técnico de ambas subactividades, se ejecutaron los siguientes comandos en la terminal:
@@ -71,3 +111,19 @@ git checkout -b feature/variables-css
 git add .
 git commit -m "refactor(css): implementar variables y tokens de diseno"
 git push origin feature/variables-css
+
+# Subactividad 4
+git checkout -b feature/interactividad-css
+git add .
+git commit -m "feat(ui): implementar pseudoclases interactivas en aside y pseudoelementos en productos"
+git push origin feature/interactividad-css
+
+# Subactividad 5
+git checkout -b feature/arquitectura-bem
+git add .
+git commit -m "refactor(styles): modularizar codigo en archivos css independientes"
+git add index.html
+git commit -m "refactor(html): aplicar nomenclatura BEM en los componentes del catalogo"
+git add .
+git commit -m "refactor(styles): actualizar modulos css con clases BEM planas y documentar hallazgos"
+git push origin feature/arquitectura-bem
